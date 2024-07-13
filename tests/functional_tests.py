@@ -15,17 +15,17 @@ class NewVisitorTest(unittest.TestCase):
     def test_can_start_a_list_and_retrieve_it_later(self: Self):
         # Mani has heard about a cool new online to-do app.
         # He goes to checkout its homepage
-        self.browser.get('http://localhost:8000')
+        self.browser.get("http://localhost:8000")
 
         # He notices the page title and header mention to-do lists
-        self.assertIn('To-Do', self.browser.title)
-        self.fail('Finish the test!')
+        self.assertIn("To-Do", self.browser.title)
+        self.fail("Finish the test!")
 
         # He is invited to enter a to-do item straight away
         # He types "Complete 'TDD - Obey the Testing GOAT' in 30 days."
         # into text box (Mani is determined to attain TDD GOAT status)
 
-        # when he hits enter, the page updates, and now the page lists 
+        # when he hits enter, the page updates, and now the page lists
         # 1. "Complete 'TDD - Obey the Testing GOAT' in 30 days." as an item in a to-do list
 
         # There is still a text box inviting him to add another item. He
@@ -33,7 +33,7 @@ class NewVisitorTest(unittest.TestCase):
 
         # The page updates again, and now shows both items on his list
 
-        # Mani wonders whether the site will remember his list. Then he sees 
+        # Mani wonders whether the site will remember his list. Then he sees
         # that the site has generated a unique URL for him -- there is some
         # exploratory text to that effect.
 
@@ -41,5 +41,6 @@ class NewVisitorTest(unittest.TestCase):
 
         # Satisfied, He starts the real work.
 
+
 if __name__ == "__main__":
-    unittest.main(warnings='ignore')
+    unittest.main(warnings="ignore")
