@@ -44,7 +44,8 @@ class NewVisitorTest(unittest.TestCase):
             any(
                 row.text == "1: Complete 'TDD - Obey the Testing GOAT' in 30 days."
                 for row in rows
-            )
+            ),
+            "New to-do item did not appear in table",
         )
 
         # There is still a text box inviting him to add another item. He
