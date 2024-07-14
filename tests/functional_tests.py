@@ -1,6 +1,9 @@
 import unittest
+import time
 
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from typing_extensions import Self
 
 
@@ -19,17 +22,34 @@ class NewVisitorTest(unittest.TestCase):
 
         # He notices the page title and header mention to-do lists
         self.assertIn("To-Do", self.browser.title)
-        self.fail("Finish the test!")
+        header_text = self.browser.find_element(By.TAG_NAME, "h1").text
+        self.assertIn("To-Do", header_text)
 
         # He is invited to enter a to-do item straight away
+        input_box = self.browser.find_element(By.ID, "id_new_item")
+        self.assertEqual(input_box.get_attribute("placeholder"), "Enter a to-do item")
+
         # He types "Complete 'TDD - Obey the Testing GOAT' in 30 days."
         # into text box (Mani is determined to attain TDD GOAT status)
+        input_box.send_keys("Complete 'TDD - Obey the Testing GOAT' in 30 days.")
 
         # when he hits enter, the page updates, and now the page lists
-        # 1. "Complete 'TDD - Obey the Testing GOAT' in 30 days." as an item in a to-do list
+        # "1: Complete 'TDD - Obey the Testing GOAT' in 30 days." as an item in a to-do list
+        input_box.send_keys(Keys.ENTER)
+        time.sleep(1)
+
+        table = self.browser.find_element(By.ID, "id_list_table")
+        rows = table.find_elements(By.TAG_NAME, "tr")
+        self.assertTrue(
+            any(
+                row.text == "1: Complete 'TDD - Obey the Testing GOAT' in 30 days."
+                for row in rows
+            )
+        )
 
         # There is still a text box inviting him to add another item. He
         # enters  "Use the principles of TDD to build a RAG application" (Mani is hungry)
+        self.fail("Finish the test!")
 
         # The page updates again, and now shows both items on his list
 
